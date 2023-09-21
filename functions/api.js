@@ -63,12 +63,9 @@ const getAllBills = async (req, res) => {
 
         const billsResponse = await axios.post('https://raydev04dd77c79eeb005e27devaos.axcloud.dynamics.com/api/services/HSMallManagementServiceGroup/HSMallManagementService/MallManagementData',
         {
-            "_fromdate":req.body._fromdate,
-            "_toDate":req.body._toDate,
-            "_store":"002"
-            /* "_fromdate":"01-01-2020",
+            "_fromdate":"01-01-2020",
             "_toDate":"31-12-2023",
-            "_store":"002" */
+            "_store":"002"
         },{
             headers: {
                 'Content-Type' : `application/json`,
