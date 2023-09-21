@@ -185,7 +185,7 @@ const fileContent2 = uniqueRecords.map(item => `P000284|S000742|${item.SALETYPE[
 
 
   }
-  router.post("/download",downloadFile) 
+  router.get("/download",downloadFile) 
 
 
 app.use('/.netlify/functions/api',router)
