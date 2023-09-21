@@ -47,7 +47,7 @@ router.get("/ping",(req,res) =>{
 /* Get All Bills Route */
 const getAllBills = async (req, res) => {
     try {
-       /*   const response = await axios.post('https://login.microsoftonline.com/dec8ecf4-adc1-45cd-9658-0266651fa289/oauth2/token',
+         const response = await axios.post('https://login.microsoftonline.com/dec8ecf4-adc1-45cd-9658-0266651fa289/oauth2/token',
         reqBody,
         {
             headers: {
@@ -63,8 +63,8 @@ const getAllBills = async (req, res) => {
 
         const billsResponse = await axios.post('https://raydev04dd77c79eeb005e27devaos.axcloud.dynamics.com/api/services/HSMallManagementServiceGroup/HSMallManagementService/MallManagementData',
         {
-            "_fromdate":"01-01-2020",
-            "_toDate":"31-12-2023",
+            "_fromdate":req.body._fromdate,
+            "_toDate":req.body._toDate,
             "_store":"002"
         },{
             headers: {
@@ -90,9 +90,9 @@ const getAllBills = async (req, res) => {
             downloadData = result;
             res.send(result);
             
-        });  */
+        }); 
 
-        res.send(req.body)
+       
        
     } catch (error) {
         console.error(error);
