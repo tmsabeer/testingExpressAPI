@@ -187,6 +187,14 @@ const fileContent2 = uniqueRecords.map(item => `P000284|S000742|${item.SALETYPE[
   }
   router.get("/download",downloadFile) 
 
+route.get("/download-check",(req,res)=>{
+     if (downloadData) {
+     res.status(200).json({message:'Download Route is working'});
+     } else {
+         res.status(500).json({message:'No shared data available'});
+     }
+})
+
 
 app.use('/.netlify/functions/api',router)
 
