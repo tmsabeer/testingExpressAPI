@@ -69,7 +69,7 @@ const getAllBills = async (req, res) => {
         },{
             headers: {
                 'Content-Type' : `application/json`,
-                'Host' : 'raydev04dd77c79eeb005e27devaos.axcloud.dynamics.com',
+               // 'Host' : 'raydev04dd77c79eeb005e27devaos.axcloud.dynamics.com',
                 'Authorization' : `Bearer ${accessToken}`
             }
         });
@@ -148,14 +148,14 @@ const receiptIDsSet = new Set();
 
 filteredRecords.forEach(item => {
   const receiptID = item.RECEIPTID[0];
-  if (!receiptIDsSet.has(receiptID)) {
+  if (receiptID && !receiptIDsSet.has(receiptID)) {
     receiptIDsSet.add(receiptID);
     uniqueRecords.push(item);
   }
 });
 
 // Step 3: Map and format the data
-const fileContent2 = uniqueRecords.map(item => `P000284|S000742|${item.SALETYPE[0] === 'SALE' ? 'B' : item.SALETYPE[0] === 'RETURN' ? 'N' : 'B'}|${item.RECEIPTID[0] ? item.RECEIPTID[0] : 'NIL'}|${item.TRANSDATE[0]}|${item.QTY[0]}|${parseFloat(item.INVOICEAMOUNT[0])+ parseFloat(item.DISCOUNT[0])}|${item.DISCOUNT[0]}|${item.INVOICEAMOUNT[0]}|${item.NETAMOUNT[0]}|${item.TAXAMOUNT[0]}|${item.SALETYPE[0] === 'SALE' ? 'N' : item.SALETYPE[0] === 'RETURN' ? 'N' : 'C'}|PAID-I|${formattedDate}`).join('\n');
+const fileContent2 = uniqueRecords.map(item => `P000284|S000881|${item.SALETYPE[0] === 'SALE' ? 'B' : item.SALETYPE[0] === 'RETURN' ? 'C' : item.SALETYPE[0] === 'SALE' && item.NETAMOUNT[0] < 0 ? 'C'  : 'B'}|${item.RECEIPTID[0]}|${item.TRANSDATE[0]}|${item.QTY[0]}|${parseFloat(item.INVOICEAMOUNT[0])+ parseFloat(item.DISCOUNT[0])}|${item.DISCOUNT[0]}|${item.INVOICEAMOUNT[0]}|${item.NETAMOUNT[0]}|${item.TAXAMOUNT[0]}|${item.SALETYPE[0] === 'SALE' ? 'N' :  'C'}|PAID-I|${formattedDate}`).join('\n');
 
 
 
@@ -175,7 +175,7 @@ const fileContent2 = uniqueRecords.map(item => `P000284|S000742|${item.SALETYPE[
      }
    
      // Create and write to a file within the folder
-     fs.writeFileSync(path.join(folderPath, `testFile_${mostLastDate}.EAI`), fileContent2);
+     fs.writeFileSync(path.join(folderPath, `S000881_${mostLastDate}.EAI`), fileContent2);
 
     res.status(200).json({message:'File Downloaded Successfully!'});
 
