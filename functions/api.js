@@ -21,7 +21,7 @@ const router = express.Router()
 const reqBody = {
     client_id: 'b00b532d-ecc7-4fe2-a9f8-48f6deeade13',
     client_secret: 'wsA8Q~y4-eNp0ac5SB7eExQlxvz6-DWBapmLhc59',
-    resource : 'https://raydev04dd77c79eeb005e27devaos.axcloud.dynamics.com',
+    resource : 'https://raymond.operations.dynamics.com',
     grant_type :'client_credentials'
 }
 
@@ -52,7 +52,7 @@ const getAllBills = async (req, res) => {
         {
             headers: {
                 'Content-Type' : `multipart/form-data; boundary=<calculated when request is sent>`,
-                'Host' : 'login.microsoftonline.com'
+              //  'Host' : 'login.microsoftonline.com'
             }
         });
 
@@ -61,11 +61,11 @@ const getAllBills = async (req, res) => {
 
        // res.send(token)
 
-        const billsResponse = await axios.post('https://raydev04dd77c79eeb005e27devaos.axcloud.dynamics.com/api/services/HSMallManagementServiceGroup/HSMallManagementService/MallManagementData',
+        const billsResponse = await axios.post('https://raymond.operations.dynamics.com/api/services/HSMallManagementServiceGroup/HSMallManagementService/MallManagementData',
         {
             "_fromdate":req.body._fromdate,
             "_toDate":req.body._toDate,
-            "_store":"002"
+            "_store":"V33"
         },{
             headers: {
                 'Content-Type' : `application/json`,
